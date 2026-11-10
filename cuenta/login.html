@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es-VE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Iniciar sesión | Comercial Jenk Cáceres</title>
+  <meta name="description" content="Inicia sesión en tu cuenta de Comercial Jenk Cáceres, tu tienda de bisutería en línea, para ver tus pedidos y descargar tus facturas.">
+  <link rel="canonical" href="https://TU-DOMINIO.com/cuenta/login.html">
+  <!-- Las pantallas de acceso no aportan al posicionamiento: se excluyen del índice pero se siguen sus enlaces -->
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#c0527a">
+  <meta name="color-scheme" content="light">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/cuenta.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="auth">
+    <aside class="auth__marca">
+      <a class="auth__logo" href="/" aria-label="Comercial Jenk Cáceres, ir al inicio">
+        <img src="/assets/img/logo-marca.svg" alt="" width="79" height="44">
+      </a>
+      <div>
+        <p class="auth__lema">Tus pedidos y facturas, en un solo lugar.</p>
+        <ul class="auth__puntos">
+          <li>Revisa el estado de cada pedido.</li>
+          <li>Descarga tus facturas digitales.</li>
+          <li>Guarda tus direcciones para comprar más rápido.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="auth__panel" id="contenido">
+      <div class="auth__caja">
+        <h1>Inicia sesión</h1>
+        <p class="auth__intro">Entra con tu correo y tu contraseña.</p>
+
+        <form class="form" data-form="login" novalidate>
+          <div class="form-alerta" data-alerta role="alert" tabindex="-1" hidden></div>
+
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="nombre@correo.com" aria-describedby="email-error" required>
+            <p class="campo__error" id="email-error" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label for="password">Contraseña</label>
+            <div class="input-clave">
+              <input id="password" name="password" type="password" autocomplete="current-password" aria-describedby="password-error" required>
+              <button type="button" data-toggle-password aria-pressed="false">Mostrar</button>
+            </div>
+            <p class="campo__error" id="password-error" hidden></p>
+          </div>
+
+          <a class="form__olvido" href="/cuenta/recuperar.html">¿Olvidaste tu contraseña?</a>
+
+          <button class="primary-btn" type="submit">Iniciar sesión</button>
+        </form>
+
+        <p class="form__pie">¿Aún no tienes cuenta? <a href="/cuenta/registro.html">Crea tu cuenta</a></p>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/js/pages/cuenta.js"></script>
+</body>
+</html>

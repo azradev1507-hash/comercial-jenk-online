@@ -1,0 +1,37 @@
+/* Utilidades mínimas compartidas por todas las páginas */
+.contenedor {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -64px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus { top: 14px; }
+
+.num { font-variant-numeric: tabular-nums; }
+
+.noscript-nav { display: flex; gap: 16px; flex-wrap: wrap; padding: 12px clamp(16px, 4vw, 32px); background: var(--surface); }

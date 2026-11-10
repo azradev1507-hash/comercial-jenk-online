@@ -1,0 +1,11 @@
+/* Importa base + componentes. Los estilos de cada pantalla viven en css/pages/ */
+@import url('base/global.css');
+@import url('base/tipografia.css');
+@import url('base/utilidades.css');
+
+@import url('components/boton.css');
+@import url('components/formulario.css');
+@import url('components/header.css');
+@import url('components/footer.css');
+@import url('components/product-card.css');
+@import url('components/toast.css');
