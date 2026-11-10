@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /cuenta/
+Disallow: /carrito.html
+Disallow: /checkout.html
+Disallow: /pago.html
+Disallow: /pedido.html
+
+Sitemap: https://TU-DOMINIO.com/sitemap.xml
