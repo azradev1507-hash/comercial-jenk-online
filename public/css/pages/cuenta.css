@@ -108,16 +108,53 @@
 }
 .input-clave button:hover { background: var(--rose-faint); }
 
+.campo input[type="date"] {
+  /* Asegurar fuente uniforme y alineación vertical limpia */
+  font-family: inherit;
+  font-size: var(--fs-md);
+  color: var(--ink);
+  cursor: pointer;
+  /* Eliminar la apariencia nativa rígida de algunos navegadores */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Color para cuando el usuario aún no ha seleccionado fecha (placeholder/dd/mm/aaaa) */
+.campo input[type="date"]:invalid {
+  color: #a18f99; /* El mismo tono de tus otros placeholders */
+}
+
+/* Icono del calendario estilizado (Chrome, Edge, Safari, Opera) */
 .campo input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.15s ease;
+  /* Aplica tu color de marca al icono usando un filtro SVG limpio */
+  filter: invert(30%) sepia(45%) saturate(800%) hue-rotate(300deg) brightness(90%);
+  opacity: 0.75;
+  padding: 4px;
+  border-radius: 6px;
+  transition: opacity .15s ease, background-color .15s ease, transform .15s ease;
 }
 
 .campo input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
+  background-color: var(--rose-faint);
+  transform: scale(1.05);
 }
 
+/* Ajustes de relleno interno para los segmentos de fecha (día, mes, año) */
+.campo input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+.campo input[type="date"]::-webkit-datetime-edit-year-field:focus,
+.campo input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.campo input[type="date"]::-webkit-datetime-edit-day-field:focus {
+  background-color: var(--rose-light);
+  color: var(--ink);
+  border-radius: 4px;
+  outline: none;
+}
 /* Casilla de términos */
 .check { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 10px; row-gap: 6px; align-items: start; }
 .check input { width: 22px; height: 22px; margin-top: 1px; accent-color: var(--rose); cursor: pointer; }
