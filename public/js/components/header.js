@@ -6,7 +6,7 @@ class SiteHeader extends HTMLElement {
     this.innerHTML = `
     <a class="skip" href="#contenido">Ir al contenido</a>
     <header class="site-header"><div class="wrap">
-      <a class="logo" href="/">Comercial Jenk Cáceres<small>Bisutería</small></a>
+      <a class="logo" href="/">Comercial Jenk Cáceres</a>
       <nav class="nav" aria-label="Principal">
         <a href="/tienda.html">Tienda</a>
         <a href="/tienda.html?cat=aretes">Aretes</a>
