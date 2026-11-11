@@ -5,6 +5,7 @@ export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // `msg` puede ser texto o un nodo (por ejemplo, con un enlace). Vacío = limpiar.
 export function setError(input, msg) {
   const el = document.getElementById(`${input.id}-error`);
+  if (!el) return;
   if (msg) {
     el.replaceChildren(msg);
     el.hidden = false;
@@ -16,9 +17,13 @@ export function setError(input, msg) {
   }
 }
 
-// Error general del formulario (role="alert"); vacío = limpiar
+// Error general del formulario ([data-alerta], role="alert"); vacío = limpiar
 export function setFormError(form, msg) {
-  form.querySelector('.form-error').textContent = msg;
+  const el = form.querySelector('[data-alerta]');
+  if (!el) return;
+  el.textContent = msg;
+  el.hidden = !msg;
+  if (msg) el.focus();
 }
 
 export function setBusy(form, busy) {
@@ -27,21 +32,22 @@ export function setBusy(form, busy) {
   if (busy) btn.setAttribute('aria-busy', 'true'); else btn.removeAttribute('aria-busy');
 }
 
-// Al escribir en un campo se quita su error
+// Al escribir o cambiar un campo se quita su error
 export function clearOnInput(form) {
-  form.addEventListener('input', (e) => {
-    if (e.target.matches('input')) setError(e.target, '');
-  });
+  const limpiar = (e) => { if (e.target.matches('input')) setError(e.target, ''); };
+  form.addEventListener('input', limpiar);
+  form.addEventListener('change', limpiar);
 }
 
-// Botón «Mostrar / Ocultar» de las contraseñas
+// Botón «Mostrar / Ocultar» de las contraseñas (el input es el del mismo .input-clave)
 export function initPasswordToggles() {
   document.querySelectorAll('[data-toggle-password]').forEach((btn) => {
-    const input = document.getElementById(btn.dataset.togglePassword);
+    const input = btn.closest('.input-clave').querySelector('input');
     btn.addEventListener('click', () => {
       const mostrar = input.type === 'password';
       input.type = mostrar ? 'text' : 'password';
       btn.textContent = mostrar ? 'Ocultar' : 'Mostrar';
+      btn.setAttribute('aria-pressed', String(mostrar));
       btn.setAttribute('aria-label', mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña');
     });
   });
