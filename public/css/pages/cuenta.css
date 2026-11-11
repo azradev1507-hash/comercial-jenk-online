@@ -57,6 +57,7 @@
 .campo input[type="email"],
 .campo input[type="tel"],
 .campo input[type="password"],
+.campo input[type="date"],
 .campo select {
   width: 100%;
   min-height: 48px;
@@ -106,6 +107,16 @@
   cursor: pointer;
 }
 .input-clave button:hover { background: var(--rose-faint); }
+
+.campo input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.campo input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
 
 /* Casilla de términos */
 .check { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 10px; row-gap: 6px; align-items: start; }
