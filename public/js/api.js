@@ -1,5 +1,7 @@
 // ÚNICO lugar con llamadas al backend. Por ahora devuelve datos de ejemplo;
 // cuando exista /api/catalog se cambia aquí y ninguna página se entera.
+import { authLocal } from './mock/auth-local.js';
+
 const MOCK = [
   { slug: 'aretes-perla-gota',   name: 'Aretes perla gota',      category: 'Aretes',    price: 4.5,  tone: '#f3dce6', bead: '#c0527a' },
   { slug: 'collar-cadena-luna',  name: 'Collar cadena luna',     category: 'Collares',  price: 8,    tone: '#f7eaf0', bead: '#8c3357' },
@@ -15,4 +17,6 @@ export const api = {
     list: async ({ limit = 8 } = {}) => MOCK.slice(0, limit),
   },
   rate: async () => 0, // tasa BCV: pendiente de conectar (0 = no mostrar Bs)
+  // Sesión de usuarios: simulada en el navegador. Con backend, cambiar por fetch('/api/auth/...') con el mismo contrato.
+  auth: authLocal,
 };

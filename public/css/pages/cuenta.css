@@ -1,0 +1,40 @@
+/* Login y registro. Misma lógica que el inicio: dos bloques de distinto color y esquinas amplias. */
+.auth { display: grid; grid-template-columns: 5fr 6fr; gap: var(--gap); padding-top: 1.2rem; }
+
+/* Bloque de saludo */
+.auth-aside { position: relative; overflow: hidden; border-radius: var(--tile); background: var(--verde-tint); padding: clamp(1.4rem, 3vw, 2.4rem); display: flex; flex-direction: column; justify-content: center; }
+.auth-aside h1 { font-size: clamp(2.1rem, 4.4vw, 3.2rem); max-width: 9ch; position: relative; }
+.auth-aside p { margin-top: 1rem; font-size: var(--fs-lg); color: #5a4852; max-width: 24ch; position: relative; }
+.auth-aside .bead { position: absolute; right: -12%; bottom: -14%; width: 56%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #fff 0 8%, var(--rose) 45%, var(--rose-deep) 100%); }
+
+/* Bloque del formulario */
+.auth-card { display: flex; align-items: center; border-radius: var(--tile); background: var(--surface); padding: clamp(1.4rem, 3vw, 2.4rem); }
+.auth-card form { display: grid; gap: 1.15rem; width: 100%; max-width: 420px; margin-inline: auto; }
+
+.field { display: grid; gap: .4rem; }
+.field label { font-weight: 600; font-size: var(--fs-sm); }
+.field input { width: 100%; min-height: 48px; padding: .7rem .9rem; font: 400 var(--fs-md) var(--font-body); color: var(--ink); background: var(--claro); border: 1.5px solid var(--muted); border-radius: 10px; transition: border-color .15s, background-color .15s; }
+.field input:hover { border-color: var(--rose-deep); }
+.field input:focus { border-color: var(--rose-deep); background: var(--surface); }
+.field input[aria-invalid="true"] { border-color: var(--danger); background: var(--danger-bg); }
+
+.hint { font-size: var(--fs-xs); color: var(--muted); }
+.field-error { font-size: var(--fs-sm); color: var(--danger-hover); font-weight: 500; }
+.field-error a { color: inherit; font-weight: 600; }
+.form-error { padding: .8rem 1rem; border-radius: 10px; background: var(--danger-bg); color: var(--danger-hover); font-size: var(--fs-sm); font-weight: 500; }
+.form-error:empty { display: none; }
+
+/* Contraseña con botón Mostrar / Ocultar dentro del campo */
+.input-group { position: relative; }
+.input-group input { padding-right: 5.6rem; }
+.input-action { position: absolute; right: .35rem; top: 50%; transform: translateY(-50%); min-height: 40px; padding: 0 .85rem; border: 0; border-radius: 8px; background: transparent; color: var(--rose-deep); font: 600 var(--fs-sm) var(--font-body); cursor: pointer; }
+.input-action:hover { background: var(--rose-faint); }
+
+.auth-switch { text-align: center; font-size: var(--fs-sm); color: var(--muted); }
+.auth-switch a { font-weight: 600; }
+
+@media (max-width: 900px) {
+  .auth { grid-template-columns: 1fr; }
+  .auth-aside { padding-right: 34%; }
+  .auth-aside .bead { width: 34%; right: -6%; top: -16%; bottom: auto; }
+}
