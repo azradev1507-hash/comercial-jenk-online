@@ -41,6 +41,10 @@ export const authRemoto = {
     avisar();
     return r.user;
   },
+  // Pide el correo de recuperación. El backend debe responder igual exista o no el correo.
+  async recover({ email }) {
+    return pedir('recover', { method: 'POST', body: { email } });
+  },
   async logout() {
     await pedir('logout', { method: 'POST', body: {} });
     avisar();

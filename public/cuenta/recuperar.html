@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es-VE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Recuperar contraseña | Comercial Jenk Cáceres</title>
+  <meta name="description" content="Recupera el acceso a tu cuenta de Comercial Jenk Cáceres con tu correo electrónico.">
+  <link rel="canonical" href="https://TU-DOMINIO.com/cuenta/recuperar.html">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#c0527a">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/cuenta.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="auth">
+    <aside class="auth__marca">
+      <a class="auth__logo" href="/" aria-label="Comercial Jenk Cáceres, ir al inicio">
+        <img src="/assets/img/logo-marca.svg" alt="" width="118" height="44">
+      </a>
+      <div><p class="auth__lema">Te ayudamos a volver a entrar.</p></div>
+    </aside>
+    <main class="auth__panel" id="contenido">
+      <div class="auth__caja">
+        <h1>Recupera tu contraseña</h1>
+        <p class="auth__intro" data-intro>Escribe el correo de tu cuenta y te enviaremos las instrucciones.</p>
+
+        <form class="form" data-form="recuperar" novalidate>
+          <div class="form-alerta" data-alerta role="alert" tabindex="-1" hidden></div>
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="nombre@correo.com" aria-describedby="email-error" required>
+            <p class="campo__error" id="email-error" hidden></p>
+          </div>
+          <button class="primary-btn" type="submit">Enviar instrucciones</button>
+        </form>
+
+        <div class="form-alerta" data-exito role="status" tabindex="-1" hidden style="background:var(--success-bg);color:#1f6040">
+          Si ese correo tiene una cuenta, te enviamos las instrucciones. Revisa también la carpeta de spam.
+        </div>
+
+        <p class="form__pie" data-pie><a href="/cuenta/login.html" data-carry-next>Volver a iniciar sesión</a></p>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="/js/pages/cuenta.js"></script>
+</body>
+</html>

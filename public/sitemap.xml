@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://TU-DOMINIO.com/</loc></url>
+  <url><loc>https://TU-DOMINIO.com/tienda.html</loc></url>
+  <url><loc>https://TU-DOMINIO.com/legal/terminos.html</loc></url>
+  <url><loc>https://TU-DOMINIO.com/legal/privacidad.html</loc></url>
+  <url><loc>https://TU-DOMINIO.com/legal/devoluciones.html</loc></url>
+  <!-- Cuando el catálogo salga de la base de datos, genera aquí una línea por producto:
+       https://TU-DOMINIO.com/producto.html?slug=<slug> -->
+</urlset>

@@ -348,3 +348,25 @@
         display: none;
     }
 }
+
+/* Etiquetas de producto (Nuevo, -20%…) y precio anterior */
+.product-card .thumb { position: relative; }
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: .2rem .65rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+}
+.badge-sale { background: var(--rose-deep); }
+.price s { margin-left: .4rem; font-weight: 400; font-size: var(--fs-sm); color: var(--muted); }
+
+/* Migas de pan */
+.migas { padding: 1.4rem .4rem 0; font-size: var(--fs-sm); color: var(--muted); }
+.migas a { color: var(--muted); }
+.migas a:hover { color: var(--rose-deep); }
+.migas [aria-current] { color: var(--ink); font-weight: 600; }

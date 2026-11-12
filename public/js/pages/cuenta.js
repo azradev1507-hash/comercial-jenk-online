@@ -80,6 +80,33 @@ function iniciarLogin(form) {
   });
 }
 
+function iniciarRecuperar(form) {
+  const { email } = form.elements;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    setFormError(form, '');
+    setError(email, '');
+    const v = email.value.trim();
+    if (!v) { setError(email, 'Escribe tu correo.'); return email.focus(); }
+    if (!EMAIL_RE.test(v)) { setError(email, 'Revisa el correo: debe verse como nombre@dominio.com.'); return email.focus(); }
+    setBusy(form, true);
+    try {
+      await api.auth.recover({ email: v });
+      // Mismo mensaje exista o no la cuenta: no revela qué correos están registrados
+      form.hidden = true;
+      document.querySelector('[data-intro]').hidden = true;
+      const ok = document.querySelector('[data-exito]');
+      ok.hidden = false;
+      ok.focus();
+    } catch (err) {
+      setBusy(form, false);
+      if (err.code === 'demasiados-intentos') setFormError(form, 'Demasiados intentos. Espera unos minutos e inténtalo de nuevo.');
+      else if (err.code === 'red') setFormError(form, 'No hay conexión con el servidor. Revisa tu internet e inténtalo de nuevo.');
+      else setFormError(form, 'No pudimos enviar las instrucciones. Inténtalo de nuevo en un momento.');
+    }
+  });
+}
+
 function iniciarRegistro(form) {
   const el = form.elements;
   const { first_name, last_name, id_type, id_number, birth_date, email, phone, latitude, longitude, address, address_ref, password, password_confirm, terms } = el;
@@ -197,6 +224,7 @@ const form = document.querySelector('form[data-form]');
 if (form) {
   if (form.dataset.form === 'login') iniciarLogin(form);
   else if (form.dataset.form === 'registro') iniciarRegistro(form);
+  else if (form.dataset.form === 'recuperar') iniciarRecuperar(form);
   clearOnInput(form);
   initPasswordToggles();
   carryNext();

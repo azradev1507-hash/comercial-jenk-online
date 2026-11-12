@@ -1,0 +1,12 @@
+{
+  "name": "Comercial Jenk Cáceres · Bisutería",
+  "short_name": "Jenk Bisutería",
+  "description": "Aretes, collares, pulseras, anillos y conjuntos. Precios en dólares y bolívares.",
+  "lang": "es-VE",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#faf4f7",
+  "theme_color": "#c0527a",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

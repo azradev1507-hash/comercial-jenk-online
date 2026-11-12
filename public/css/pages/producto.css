@@ -1,0 +1,17 @@
+.producto { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--gap); padding-top: 1rem; }
+.pp-thumb { position: relative; aspect-ratio: 1; display: grid; place-items: center; border-radius: var(--tile); background: var(--tone, var(--rose-faint)); }
+.pp-thumb i { width: 34%; }
+.pp-info { display: flex; flex-direction: column; justify-content: center; gap: .9rem; padding: clamp(1rem, 3vw, 2.4rem); background: var(--surface); border-radius: var(--tile); }
+.pp-info .cat { font-size: var(--fs-sm); color: var(--muted); }
+.pp-info h1 { font-size: var(--fs-h2); line-height: 1.1; }
+.pp-precio { font-size: 1.7rem; font-weight: 800; color: var(--rose-deep); display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .7rem; }
+.pp-precio s { font-size: var(--fs-md); font-weight: 400; color: var(--muted); }
+.pp-precio small { font-size: var(--fs-sm); font-weight: 400; color: var(--muted); }
+.pp-compra { display: flex; flex-wrap: wrap; align-items: end; gap: 1rem; }
+.pp-compra .campo { width: 110px; }
+.pp-compra input { width: 100%; min-height: 48px; padding: .7rem .9rem; border: 1.5px solid var(--muted); border-radius: 10px; font: 400 var(--fs-md) var(--font-body); }
+.pp-compra input:focus { outline: none; border-color: var(--rose-deep); box-shadow: 0 0 0 3px var(--verde-tint); }
+.pp-compra label { font-weight: 600; font-size: var(--fs-sm); }
+.pp-aviso { min-height: 1.5em; font-size: var(--fs-sm); color: #1f6040; font-weight: 500; }
+.pp-notas { list-style: none; display: grid; gap: .3rem; padding-top: .8rem; border-top: 1px solid var(--line); font-size: var(--fs-sm); color: var(--muted); }
+@media (max-width: 800px) { .producto { grid-template-columns: 1fr; } }

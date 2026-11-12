@@ -9,6 +9,6 @@ export function renderProductCard(p, rate = 0) {
   const price = h('span', { class: 'price' }, formatUsd(p.price));
   if (p.oldPrice) price.append(h('s', {}, formatUsd(p.oldPrice)));
   if (rate) price.append(h('small', {}, formatBs(p.price, rate)));
-  return h('a', { class: 'product-card', href: `/producto/${p.slug}` }, thumb,
+  return h('a', { class: 'product-card', href: `/producto.html?slug=${encodeURIComponent(p.slug)}` }, thumb,
     h('div', { class: 'info' }, h('span', { class: 'cat' }, p.category), h('h3', {}, p.name), price));
 }

@@ -12,6 +12,7 @@ function authSimulada() {
   return {
     register: (d) => cargar().then((a) => a.register(d)),
     login: (d) => cargar().then((a) => a.login(d)),
+    recover: (d) => cargar().then((a) => a.recover(d)),
     logout: () => cargar().then((a) => a.logout()),
     me: () => cargar().then((a) => a.me()),
     onChange(cb) { let off = () => {}; cargar().then((a) => { off = a.onChange(cb); }); return () => off(); },
@@ -45,8 +46,8 @@ const MOCK = [
 // Para añadir una promoción basta con agregar un objeto aquí.
 const PROMOS = [
   { id: 'cupon-bienvenida', type: 'coupon', size: 'lg', title: '10% menos en tu primera compra', text: 'Usa este cupón al pagar.', note: 'Válido en compras desde $10', code: 'JENK10' },
-  { id: 'promo-conjuntos',  type: 'promo',  size: 'md', tone: 'rose', title: 'Conjuntos desde $10.50', text: 'Collar y aretes que combinan.', cta: 'Ver conjuntos', href: 'tienda.html?cat=conjuntos' },
-  { id: 'promo-pulseras',   type: 'promo',  size: 'sm', tone: 'ink',  title: '2 pulseras por $9', text: 'Hasta el domingo.', cta: 'Ver pulseras', href: 'tienda.html?cat=pulseras' },
+  { id: 'promo-conjuntos',  type: 'promo',  size: 'md', tone: 'rose', title: 'Conjuntos desde $10.50', text: 'Collar y aretes que combinan.', cta: 'Ver conjuntos', href: '/tienda.html?cat=conjuntos' },
+  { id: 'promo-pulseras',   type: 'promo',  size: 'sm', tone: 'ink',  title: '2 pulseras por $9', text: 'Hasta el domingo.', cta: 'Ver pulseras', href: '/tienda.html?cat=pulseras' },
 ];
 
 const norm = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -67,9 +68,51 @@ export const api = {
       return items.slice(0, limit);
     },
     categories: async () => [...new Set(MOCK.map((p) => p.category))],
+    get: async (slug) => MOCK.find((p) => p.slug === slug) ?? null,
+    // Devuelve un Map slug → producto (los slugs que ya no existen simplemente no aparecen)
+    byIds: async (slugs) => new Map(MOCK.filter((p) => slugs.includes(p.slug)).map((p) => [p.slug, p])),
   },
   promos: {
     list: async () => PROMOS,
+  },
+  // Cupones: el backend es quien decide. Este mock refleja el banner de la tienda (JENK10: 10% desde $10).
+  coupons: {
+    validate: async (code, subtotalCents) => {
+      const c = String(code).trim().toUpperCase();
+      if (c === 'JENK10') {
+        if (subtotalCents < 1000) return { ok: false, message: 'Este cupón aplica en compras desde $10.' };
+        return { ok: true, code: c, descuentoCents: Math.round(subtotalCents * 0.10), message: '10% de descuento aplicado.' };
+      }
+      return { ok: false, message: 'Ese cupón no existe o ya venció.' };
+    },
+  },
+  // Métodos de entrega. costoUsd: número = costo fijo; null = se confirma al procesar el pedido (pendiente definir tarifas).
+  delivery: {
+    list: async () => [
+      { id: 'RET', name: 'Retiro en tienda', costoUsd: 0 },
+      { id: 'ED',  name: 'Entrega a domicilio', costoUsd: null },
+      { id: 'EDI', name: 'Entrega inmediata', costoUsd: null },
+      { id: 'EPP', name: 'Envío por paquetería', costoUsd: null },
+    ],
+  },
+  // Crear pedido: POST /api/orders (por construir en el backend). Se envían solo slug y cantidad:
+  // el servidor debe volver a calcular precios, cupón y envío.
+  orders: {
+    create: async ({ items, coupon, delivery }) => {
+      let r;
+      try {
+        r = await fetch('/api/orders', {
+          method: 'POST', credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items, coupon: coupon || null, delivery }),
+        });
+      } catch { throw Object.assign(new Error('Sin conexión.'), { code: 'red' }); }
+      if (r.status === 401) throw Object.assign(new Error('Sin sesión.'), { code: 'sin-sesion' });
+      if (r.status === 404 || r.status === 405) throw Object.assign(new Error('Pedidos aún no disponibles.'), { code: 'no-disponible' });
+      let d = null; try { d = await r.json(); } catch { /* sin cuerpo */ }
+      if (!r.ok) throw Object.assign(new Error(d?.error?.message ?? 'Error del servidor.'), { code: d?.error?.code ?? 'error-servidor' });
+      return d;
+    },
   },
   rate: async () => 0, // tasa BCV: pendiente de conectar (0 = no mostrar Bs)
   // Sesión de usuarios: backend real (/api/auth/*, cookie HttpOnly). El mock queda solo para desarrollo sin servidor.

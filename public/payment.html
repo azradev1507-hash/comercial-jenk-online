@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es-VE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carrito de compras · Comercial Jenk Cáceres</title>
+  <meta name="description" content="Revisa las piezas de tu carrito, aplica tu cupón y elige cómo recibir tu pedido.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#c0527a">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/inicio.css">
+  <link rel="stylesheet" href="/css/pages/tienda.css">
+  <link rel="stylesheet" href="/css/pages/payment.css">
+</head>
+<body>
+  <site-header></site-header>
+  <main id="contenido" class="wrap pago">
+    <h1>Carrito de compras</h1>
+
+    <div class="pago-exito tile" id="exito" role="status" tabindex="-1" hidden>
+      <h2>¡Pedido recibido!</h2>
+      <p>Te contactaremos para confirmar el pago y la entrega.</p>
+      <a class="btn" href="/tienda.html">Seguir comprando</a>
+    </div>
+
+    <div class="pago-grid" id="contenido-carrito">
+      <section aria-labelledby="t-items">
+        <h2 id="t-items" class="sr-only">Piezas en tu carrito</h2>
+        <ul class="items" id="items"></ul>
+        <div class="tile empty" id="vacio" hidden>
+          <h2>Tu carrito está vacío</h2>
+          <p>Cuando agregues piezas aparecerán aquí.</p>
+          <a class="btn" href="/tienda.html">Ver la tienda</a>
+        </div>
+      </section>
+
+      <aside class="tile resumen" id="resumen" aria-labelledby="t-resumen">
+        <h2 id="t-resumen">Resumen</h2>
+        <dl class="totales">
+          <div><dt>Subtotal</dt><dd id="t-subtotal">$0.00</dd></div>
+          <div id="fila-descuento" hidden><dt>Descuento</dt><dd id="t-descuento">-$0.00</dd></div>
+          <div><dt>Envío</dt><dd id="t-envio">Elige un método</dd></div>
+          <div class="total"><dt>Total</dt><dd><span id="t-total">$0.00</span><small id="t-total-bs"></small></dd></div>
+        </dl>
+
+        <form class="form" id="form-pago" novalidate>
+          <div class="form-alerta" data-alerta id="alerta" role="alert" tabindex="-1" hidden></div>
+
+          <div class="campo">
+            <label for="cuponPay">Cupón</label>
+            <div class="cupon-fila">
+              <input id="cuponPay" name="cuponPay" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Ingresa tu cupón" aria-describedby="cuponPay-ayuda">
+              <button type="button" class="btn btn-ghost" id="aplicar">Aplicar</button>
+            </div>
+            <p class="campo__ayuda" id="cuponPay-ayuda">Coloca el código canjeable para disfrutar del descuento.</p>
+          </div>
+
+          <div class="campo">
+            <label for="deliveryMethod">Método de entrega</label>
+            <select id="deliveryMethod" name="deliveryMethod" aria-describedby="deliveryMethod-ayuda" required></select>
+            <p class="campo__ayuda" id="deliveryMethod-ayuda">El método de entrega puede afectar el precio final.</p>
+            <p class="campo__error" id="deliveryMethod-error" hidden></p>
+          </div>
+
+          <button class="primary-btn" type="submit">Finalizar pedido</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+  <site-footer></site-footer>
+  <script type="module" src="/js/components/header.js"></script>
+  <script type="module" src="/js/components/footer.js"></script>
+  <script type="module" src="/js/pages/payment.js"></script>
+</body>
+</html>
