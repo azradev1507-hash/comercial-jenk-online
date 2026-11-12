@@ -3,19 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Comercial Jenk Cáceres · Bisutería</title>
-  <meta name="description" content="Aretes, collares, pulseras y conjuntos. Precios en dólares y bolívares.">
+  <title>Tienda · Comercial Jenk Cáceres · Bisutería</title>
+  <meta name="description" content="Catálogo de aretes, collares, pulseras, anillos y conjuntos. Precios en dólares y bolívares.">
   <meta name="theme-color" content="#c0527a">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/pages/inicio.css">
+  <link rel="stylesheet" href="css/pages/tienda.css">
 </head>
 <body>
-    <site-header></site-header>
-    <main class="wrap">
-        <site-hero></site-hero>
-    </main>
-    <site-footer></site-footer>
-    <script type="module" src="js/components/header.js"></script>
-    <script type="module" src="js/components/hero.js"></script>
-    <script type="module" src="js/components/footer.js"></script>
+  <site-header></site-header>
+  <main id="contenido" class="wrap">
+    <site-hero></site-hero>
+    <promo-banners></promo-banners>
+
+    <section class="section" aria-labelledby="t-catalogo">
+      <div class="section-head">
+        <h2 id="t-catalogo">Catálogo</h2>
+        <p class="count" id="cuenta" aria-live="polite"></p>
+      </div>
+      <div class="toolbar">
+        <div class="chips" id="chips" role="group" aria-label="Filtrar por tipo de pieza"></div>
+        <label class="sort">Ordenar por <select id="orden"></select></label>
+      </div>
+      <div class="grid-catalog" id="productos" aria-live="polite"></div>
+      <div class="more-wrap"><button type="button" class="btn btn-ghost" id="mas" hidden></button></div>
+    </section>
+  </main>
+  <site-footer></site-footer>
+  <script type="module" src="js/components/header.js"></script>
+  <script type="module" src="js/components/footer.js"></script>
+  <script type="module" src="js/components/hero.js"></script>
+  <script type="module" src="js/components/promo-banners.js"></script>
+  <script type="module" src="js/pages/tienda.js"></script>
 </body>
+</html>
