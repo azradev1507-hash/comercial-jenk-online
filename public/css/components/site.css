@@ -74,6 +74,7 @@
     display: inline-flex;
     gap: .4rem;
     align-items: center;
+    z-index: 999;
     min-height: 44px;
     padding: 0 1rem;
     border-radius: 999px;
@@ -88,7 +89,7 @@
 .cart-link:hover {
     background: var(--verde-tint);
     color: var(--rose-deep);
-    padding: 0 1.25rem; 
+    padding: 0 3.25rem; 
 }
 
 @media (max-width: 720px) {
