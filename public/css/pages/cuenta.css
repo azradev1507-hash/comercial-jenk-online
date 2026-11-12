@@ -58,6 +58,7 @@
 .campo input[type="tel"],
 .campo input[type="password"],
 .campo input[type="date"],
+.campo textarea,
 .campo select {
   width: 100%;
   min-height: 48px;
@@ -69,11 +70,12 @@
   border-radius: 10px;
   transition: border-color .15s, box-shadow .15s, background-color .15s;
 }
-.campo input::placeholder { color: #a18f99; }
-.campo input:hover, .campo select:hover { border-color: var(--rose-deep); }
-.campo input:focus, .campo select:focus { outline: none; border-color: var(--rose-deep); box-shadow: 0 0 0 3px var(--verde-tint); }
-.campo input[aria-invalid="true"] { border-color: var(--danger); background: var(--danger-bg); }
-.campo input[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(192, 57, 43, .18); }
+.campo textarea { resize: vertical; line-height: 1.4; }
+.campo input::placeholder, .campo textarea::placeholder { color: #a18f99; }
+.campo input:hover, .campo select:hover, .campo textarea:hover { border-color: var(--rose-deep); }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--rose-deep); box-shadow: 0 0 0 3px var(--verde-tint); }
+.campo input[aria-invalid="true"], .campo textarea[aria-invalid="true"] { border-color: var(--danger); background: var(--danger-bg); }
+.campo input[aria-invalid="true"]:focus, .campo textarea[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(192, 57, 43, .18); }
 
 .campo__ayuda { font-size: var(--fs-xs); color: var(--muted); }
 .campo__error { font-size: var(--fs-sm); font-weight: 500; color: var(--danger-hover); }
@@ -108,53 +110,45 @@
 }
 .input-clave button:hover { background: var(--rose-faint); }
 
-.campo input[type="date"] {
-  /* Asegurar fuente uniforme y alineación vertical limpia */
-  font-family: inherit;
-  font-size: var(--fs-md);
-  color: var(--ink);
-  cursor: pointer;
-  /* Eliminar la apariencia nativa rígida de algunos navegadores */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
+/* ---------- Dirección con mapa ---------- */
+.direccion { display: grid; gap: 12px; min-width: 0; border: 0; }
+.direccion legend { padding: 0; margin-bottom: 6px; font-weight: 600; font-size: var(--fs-sm); }
+.opcional { font-weight: 400; color: var(--muted); }
 
-/* Color para cuando el usuario aún no ha seleccionado fecha (placeholder/dd/mm/aaaa) */
-.campo input[type="date"]:invalid {
-  color: #a18f99; /* El mismo tono de tus otros placeholders */
+.mapa-busqueda { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.mapa-busqueda input {
+  width: 100%; min-height: 48px; padding: .7rem .9rem;
+  font: 400 var(--fs-md) var(--font-body); color: var(--ink);
+  background: var(--surface); border: 1.5px solid var(--muted); border-radius: 10px;
 }
+.mapa-busqueda input:hover { border-color: var(--rose-deep); }
+.mapa-busqueda input:focus { outline: none; border-color: var(--rose-deep); box-shadow: 0 0 0 3px var(--verde-tint); }
+.btn-sec {
+  min-height: 48px; padding: 0 1.2rem; cursor: pointer;
+  font: 600 var(--fs-sm) var(--font-body); color: var(--rose-deep);
+  background: var(--surface); border: 1.5px solid var(--rose); border-radius: 10px;
+  transition: background-color .15s;
+}
+.btn-sec:hover { background: var(--rose-faint); }
+.btn-sec:disabled { opacity: .6; cursor: progress; }
 
-/* Icono del calendario estilizado (Chrome, Edge, Safari, Opera) */
-.campo input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  /* Aplica tu color de marca al icono usando un filtro SVG limpio */
-  filter: invert(30%) sepia(45%) saturate(800%) hue-rotate(300deg) brightness(90%);
-  opacity: 0.75;
-  padding: 4px;
-  border-radius: 6px;
-  transition: opacity .15s ease, background-color .15s ease, transform .15s ease;
-}
+.mapa-resultados { list-style: none; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; max-height: 220px; overflow-y: auto; }
+.mapa-resultados li + li { border-top: 1px solid var(--line); }
+.mapa-resultados button { display: block; width: 100%; min-height: 44px; padding: .6rem .9rem; text-align: left; font: 400 var(--fs-sm) var(--font-body); color: var(--ink); background: none; border: 0; cursor: pointer; }
+.mapa-resultados button:hover, .mapa-resultados button:focus-visible { background: var(--rose-faint); }
 
-.campo input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
-  background-color: var(--rose-faint);
-  transform: scale(1.05);
-}
+.mapa { height: 280px; isolation: isolate; border: 1.5px solid var(--muted); border-radius: 10px; overflow: hidden; background: var(--surface-2); }
+.mapa-pie { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.mapa-pie .campo__ayuda { flex: 1; }
+.campo__ayuda.is-error { color: var(--danger-hover); font-weight: 500; }
+.enlace-btn { flex: none; min-height: 32px; padding: 0; border: 0; background: none; color: var(--rose-deep); font: 600 var(--fs-sm) var(--font-body); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.enlace-btn:disabled { opacity: .5; cursor: not-allowed; }
 
-/* Ajustes de relleno interno para los segmentos de fecha (día, mes, año) */
-.campo input[type="date"]::-webkit-datetime-edit-fields-wrapper {
-  padding: 0;
-}
+/* Marcador de marca (gota rosa) */
+.pin-icono { background: none; border: 0; }
+.pin { display: block; width: 30px; height: 30px; background: var(--rose); border: 3px solid #fff; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 0 2px 6px rgba(26, 18, 24, .4); }
+.pin::after { content: ""; position: absolute; inset: 9px; background: #fff; border-radius: 50%; }
 
-.campo input[type="date"]::-webkit-datetime-edit-year-field:focus,
-.campo input[type="date"]::-webkit-datetime-edit-month-field:focus,
-.campo input[type="date"]::-webkit-datetime-edit-day-field:focus {
-  background-color: var(--rose-light);
-  color: var(--ink);
-  border-radius: 4px;
-  outline: none;
-}
 /* Casilla de términos */
 .check { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 10px; row-gap: 6px; align-items: start; }
 .check input { width: 22px; height: 22px; margin-top: 1px; accent-color: var(--rose); cursor: pointer; }

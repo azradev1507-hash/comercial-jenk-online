@@ -16,7 +16,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="/css/pages/cuenta.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -70,8 +72,9 @@
           </div>
 
           <div class="campo">
-            <label for="birth_date">Fecha de Nacimiento</label>
-              <input type="date" name="birth-date" id="birth_date" aria-label="Fecha de nacimiento">
+            <label for="birth_date">Fecha de nacimiento</label>
+            <input id="birth_date" name="birth_date" type="date" autocomplete="bday" min="1900-01-01" aria-describedby="birth_date-error" required>
+            <p class="campo__error" id="birth_date-error" hidden></p>
           </div>
 
           <div class="campo">
@@ -87,12 +90,37 @@
             <p class="campo__error" id="phone-error" hidden></p>
           </div>
 
-          <div class="campo">
-            <label for="direction">Direccion</label>
-            <input id="direction" name="direction" type="text" placeholder="Aragua, Girardot, Av. Bolivar.">
-            <p class="campo__ayuda" id="direction-ayuda">Ingresa la Direccion de tu domicilio (puedes editarla mas
-              adelante)</p>
-          </div>
+          <fieldset class="direccion" data-direccion>
+            <legend>Dirección de entrega</legend>
+            <p class="campo__ayuda" id="mapa-ayuda">Busca tu dirección o toca el mapa para marcar el punto exacto; lo usaremos para tus envíos y delivery.</p>
+
+            <div class="mapa-busqueda">
+              <input type="search" data-mapa-busqueda aria-label="Buscar dirección o lugar" placeholder="Ej.: Av. Bolívar, Maracay" autocomplete="off" aria-describedby="mapa-ayuda">
+              <button type="button" class="btn-sec" data-mapa-buscar>Buscar</button>
+            </div>
+            <ul class="mapa-resultados" data-mapa-resultados hidden></ul>
+
+            <div class="mapa" data-mapa role="application" aria-label="Mapa para marcar tu dirección"></div>
+            <div class="mapa-pie">
+              <p class="campo__ayuda" data-mapa-estado role="status" aria-live="polite"></p>
+              <button type="button" class="enlace-btn" data-mapa-ubicar>Usar mi ubicación</button>
+            </div>
+
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <p class="campo__error" id="latitude-error" hidden></p>
+
+            <div class="campo">
+              <label for="address">Dirección</label>
+              <textarea id="address" name="address" rows="2" maxlength="250" autocomplete="street-address" aria-describedby="address-error" required></textarea>
+              <p class="campo__error" id="address-error" hidden></p>
+            </div>
+
+            <div class="campo">
+              <label for="address_ref">Punto de referencia <span class="opcional">(opcional)</span></label>
+              <input id="address_ref" name="address_ref" type="text" maxlength="120" placeholder="Casa blanca, frente a la panadería">
+            </div>
+          </fieldset>
 
           <div class="campo">
             <label for="password">Contraseña</label>

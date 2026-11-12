@@ -34,7 +34,7 @@ export function setBusy(form, busy) {
 
 // Al escribir o cambiar un campo se quita su error
 export function clearOnInput(form) {
-  const limpiar = (e) => { if (e.target.matches('input')) setError(e.target, ''); };
+  const limpiar = (e) => { if (e.target.matches('input, textarea')) setError(e.target, ''); };
   form.addEventListener('input', limpiar);
   form.addEventListener('change', limpiar);
 }

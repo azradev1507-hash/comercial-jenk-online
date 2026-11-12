@@ -34,14 +34,15 @@ const publico = ({ id, nombre, email }) => ({ id, nombre, email });
 function fallo(code, message) { const e = new Error(message); e.code = code; return e; }
 
 // Contrato que debe respetar el backend real:
-//   register({ first_name, last_name, id_type, id_number, email, phone, password })
+//   register({ first_name, last_name, id_type, id_number, birth_date, email, phone,
+//             address, address_ref, latitude, longitude, password })
 //                                         → { id, nombre, email[, verificacion] } | error code 'email-existe' | 'cedula-existe'
 //   login({ email, password })            → { id, nombre, email }   | error code 'credenciales'
 //   logout()                              → void
 //   me()                                  → { id, nombre, email } | null
 //   onChange(cb)                          → función para dejar de escuchar (sesión cambió en otra pestaña)
 export const authLocal = {
-  async register({ first_name, last_name, id_type, id_number, email, phone, password }) {
+  async register({ first_name, last_name, id_type, id_number, birth_date, email, phone, address, address_ref, latitude, longitude, password }) {
     const users = leer(KEY_USERS, []);
     const correo = limpiarEmail(email);
     if (users.some(u => u.email === correo)) throw fallo('email-existe', 'Ya existe una cuenta con este correo.');
@@ -54,7 +55,12 @@ export const authLocal = {
       last_name: String(last_name).trim(),
       id_type,
       id_number,
+      birth_date,
       phone,
+      address,
+      address_ref,
+      latitude,
+      longitude,
       email: correo,
       sal,
       clave: await hashClave(password, sal),
