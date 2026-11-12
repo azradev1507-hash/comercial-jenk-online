@@ -31,17 +31,7 @@ class SiteHeader extends HTMLElement {
       // Desde una página de la tienda, al ingresar se vuelve a la misma página
       const next = location.pathname.startsWith('/cuenta/') ? ''
         : `?next=${encodeURIComponent(location.pathname + location.search)}`;
-      caja.replaceChildren(
-        h('a', { 
-          class: 'account-link', 
-          href: `/cuenta/login.html${next}` 
-        }, `
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        `)
-      );
+        caja.replaceChildren(h('a', { class: 'account-link', href: `/cuenta/login.html${next}` }, ''));
       return;
     }
     const salir = h('button', { type: 'button', class: 'account-out' }, 'Salir');
