@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es-VE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Crear cuenta | Comercial Jenk Cáceres</title>
+  <meta name="description" content="Crea tu cuenta en Comercial Jenk Cáceres, tu tienda de bisutería en línea, con tu cédula y tu correo para comprar y seguir tus pedidos.">
+  <link rel="canonical" href="https://TU-DOMINIO.com/cuenta/registro.html">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#c0527a">
+  <meta name="color-scheme" content="light">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/css/pages/cuenta.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="auth">
+    <aside class="auth__marca">
+      <a class="auth__logo" href="/" aria-label="Comercial Jenk Cáceres, ir al inicio">
+        <img src="/assets/img/logo-marca.svg" alt="" width="118" height="44">
+      </a>
+      <div>
+        <p class="auth__lema">Crea tu cuenta una vez y compra cuando quieras.</p>
+        <ul class="auth__puntos">
+          <li>Precios en dólares y en bolívares.</li>
+          <li>Factura digital en cada compra confirmada.</li>
+          <li>Tus datos se piden solo una vez.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="auth__panel" id="contenido">
+      <div class="auth__caja">
+        <h1>Crea tu cuenta</h1>
+        <p class="auth__intro" data-intro>Con tu cédula y tu correo podrás comprar, ver tus pedidos y descargar tus facturas.</p>
+
+        <form class="form" data-form="registro" novalidate>
+          <div class="form-alerta" data-alerta role="alert" tabindex="-1" hidden></div>
+
+          <div class="form__fila">
+            <div class="campo">
+              <label for="first_name">Nombre</label>
+              <input id="first_name" name="first_name" type="text" autocomplete="given-name" aria-describedby="first_name-error" required>
+              <p class="campo__error" id="first_name-error" hidden></p>
+            </div>
+            <div class="campo">
+              <label for="last_name">Apellido</label>
+              <input id="last_name" name="last_name" type="text" autocomplete="family-name" aria-describedby="last_name-error" required>
+              <p class="campo__error" id="last_name-error" hidden></p>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="id_number">Cédula</label>
+            <div class="cedula">
+              <select id="id_type" name="id_type" aria-label="Tipo de cédula">
+                <option value="V" selected>V</option>
+                <option value="E">E</option>
+              </select>
+              <input id="id_number" name="id_number" type="text" inputmode="numeric" autocomplete="off" placeholder="12345678" aria-describedby="id_number-ayuda id_number-error" required>
+            </div>
+            <p class="campo__ayuda" id="id_number-ayuda">Solo números, sin puntos.</p>
+            <p class="campo__error" id="id_number-error" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label for="birth_date">Fecha de nacimiento</label>
+            <input id="birth_date" name="birth_date" type="date" autocomplete="bday" min="1900-01-01" aria-describedby="birth_date-error" required>
+            <p class="campo__error" id="birth_date-error" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="nombre@correo.com" aria-describedby="email-error" required>
+            <p class="campo__error" id="email-error" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label for="phone">Teléfono móvil</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="0414 1234567" aria-describedby="phone-ayuda phone-error" required>
+            <p class="campo__ayuda" id="phone-ayuda">Número venezolano que empieza por 04.</p>
+            <p class="campo__error" id="phone-error" hidden></p>
+          </div>
+
+          <fieldset class="direccion" data-direccion>
+            <legend>Dirección de entrega</legend>
+            <p class="campo__ayuda" id="mapa-ayuda">Busca tu dirección o toca el mapa para marcar el punto exacto; lo usaremos para tus envíos y delivery.</p>
+
+            <div class="mapa-busqueda">
+              <input type="search" data-mapa-busqueda aria-label="Buscar dirección o lugar" placeholder="Ej.: Av. Bolívar, Maracay" autocomplete="off" aria-describedby="mapa-ayuda">
+              <button type="button" class="btn-sec" data-mapa-buscar>Buscar</button>
+            </div>
+            <ul class="mapa-resultados" data-mapa-resultados hidden></ul>
+
+            <div class="mapa" data-mapa role="application" aria-label="Mapa para marcar tu dirección"></div>
+            <div class="mapa-pie">
+              <p class="campo__ayuda" data-mapa-estado role="status" aria-live="polite"></p>
+              <button type="button" class="enlace-btn" data-mapa-ubicar>Usar mi ubicación</button>
+            </div>
+
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <p class="campo__error" id="latitude-error" hidden></p>
+
+            <div class="campo">
+              <label for="address">Dirección</label>
+              <textarea id="address" name="address" rows="2" maxlength="250" autocomplete="street-address" aria-describedby="address-error" required></textarea>
+              <p class="campo__error" id="address-error" hidden></p>
+            </div>
+
+            <div class="campo">
+              <label for="address_ref">Punto de referencia <span class="opcional">(opcional)</span></label>
+              <input id="address_ref" name="address_ref" type="text" maxlength="120" placeholder="Casa blanca, frente a la panadería">
+            </div>
+          </fieldset>
+
+          <div class="campo">
+            <label for="password">Contraseña</label>
+            <div class="input-clave">
+              <input id="password" name="password" type="password" autocomplete="new-password" aria-describedby="password-ayuda password-error" required>
+              <button type="button" data-toggle-password aria-pressed="false" aria-label="Mostrar contraseña">Mostrar</button>
+            </div>
+            <p class="campo__ayuda" id="password-ayuda">Mínimo 8 caracteres, con al menos una letra y un número.</p>
+            <p class="campo__error" id="password-error" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label for="password_confirm">Repite la contraseña</label>
+            <input id="password_confirm" name="password_confirm" type="password" autocomplete="new-password" aria-describedby="password_confirm-error" required>
+            <p class="campo__error" id="password_confirm-error" hidden></p>
+          </div>
+
+          <div class="campo">
+            <div class="check">
+              <input id="terms" name="terms" type="checkbox" aria-describedby="terms-error">
+              <label for="terms">Acepto los <a href="/legal/terminos.html">términos y condiciones</a> y la <a href="/legal/privacidad.html">política de privacidad</a>.</label>
+              <p class="campo__error" id="terms-error" hidden></p>
+            </div>
+          </div>
+
+          <button class="primary-btn" type="submit">Crear cuenta</button>
+        </form>
+
+        <section class="exito" data-exito tabindex="-1" aria-labelledby="exito-titulo" hidden>
+          <h2 id="exito-titulo" data-exito-titulo>Revisa tu correo</h2>
+          <p data-exito-texto>Enviamos un enlace de verificación a <strong data-exito-email></strong>. Ábrelo para activar tu cuenta.</p>
+          <a class="btn" href="/cuenta/login.html" data-carry-next>Ir a iniciar sesión</a>
+        </section>
+
+        <p class="form__pie" data-pie>¿Ya tienes cuenta? <a href="/cuenta/login.html" data-carry-next>Inicia sesión</a></p>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/js/pages/cuenta.js"></script>
+</body>
+</html>
