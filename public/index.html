@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comercial Jenk Cáceres · Bisutería</title>
+  <meta name="description" content="Aretes, collares, pulseras y conjuntos. Precios en dólares y bolívares.">
+  <meta name="theme-color" content="#c0527a">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/pages/inicio.css">
+</head>
+<body>
+  <site-header></site-header>
+  <main id="contenido" class="wrap">
+    <section class="bento bento-hero" aria-label="Portada">
+      <div class="tile t-main">
+        <h1>Bisutería para cada día y cada ocasión</h1>
+        <p>Aretes, collares, pulseras y conjuntos para estrenar hoy.</p>
+        <div class="acciones"><a class="btn" href="/tienda.html">Ver la tienda</a></div>
+      </div>
+      <div class="tile t-strand">
+        <svg id="strand" class="strand" viewBox="0 0 500 400" role="img" aria-label="Hilo de cuentas rosas y perlas con un dije">
+          <defs>
+            <radialGradient id="b-rose" cx=".32" cy=".28" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".2" stop-color="#e8a0b8"/><stop offset=".7" stop-color="#c0527a"/><stop offset="1" stop-color="#8c3357"/></radialGradient>
+            <radialGradient id="b-deep" cx=".32" cy=".28" r=".8"><stop offset="0" stop-color="#f3dce6"/><stop offset=".5" stop-color="#8c3357"/><stop offset="1" stop-color="#4f1a31"/></radialGradient>
+            <radialGradient id="b-pearl" cx=".32" cy=".28" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#f1e3e9"/><stop offset="1" stop-color="#cdb7c2"/></radialGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="tile t-money">
+        <h2>Dólares y bolívares</h2>
+        <p>Cada precio se muestra en las dos monedas, a la tasa BCV del día.</p>
+      </div>
+      <div class="tile t-gift">
+        <div><h2>¿Regalo?</h2><p>Collar y aretes que combinan, listos para entregar.</p></div>
+        <a class="btn btn-ghost" href="/tienda.html?cat=conjuntos">Ver conjuntos</a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-cats">
+      <div class="section-head"><h2 id="t-cats">Compra por tipo</h2></div>
+      <div class="bento bento-cats">
+        <a class="tile cat-tile cat-wide cat-tall" style="--tone:#f3dce6;--bead:#c0527a" href="/tienda.html?cat=aretes">Aretes</a>
+        <a class="tile cat-tile" style="--tone:#fef3e0;--bead:#b5700d" href="/tienda.html?cat=collares">Collares</a>
+        <a class="tile cat-tile" style="--tone:#f7eaf0;--bead:#e8a0b8" href="/tienda.html?cat=pulseras">Pulseras</a>
+        <a class="tile cat-tile cat-wide" style="--tone:#f2e8ee;--bead:#8c3357" href="/tienda.html?cat=anillos">Anillos</a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-dest">
+      <div class="section-head"><h2 id="t-dest">Lo más nuevo</h2><a href="/tienda.html">Ver todo</a></div>
+      <div class="bento grid-products" id="destacados" aria-live="polite"></div>
+    </section>
+  </main>
+  <site-footer></site-footer>
+  <script type="module" src="/js/components/header.js"></script>
+  <script type="module" src="/js/components/footer.js"></script>
+  <script type="module" src="/js/pages/inicio.js"></script>
+</body>
+</html>
