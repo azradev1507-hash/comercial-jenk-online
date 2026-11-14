@@ -1,14 +1,15 @@
 import { api } from '../api.js';
 import { h } from '../utils/dom.js';
 import { carrito } from '../services/carrito.js';
+import { limpiarRestosDeCache } from '../utils/sin-cache.js';
 
-// Sin conexión, las páginas muestran /offline.html (el service worker solo hace eso; no guarda nada más)
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+// Sin service worker ni caché: se retira el que dejaron versiones anteriores del sitio
+limpiarRestosDeCache();
 
 class SiteHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-     <a class="skip" href="#contenido">Ir al contenido</a>
+    <a class="skip" href="#contenido">Ir al contenido</a>
     <header class="site-header"><div class="wrap">
       <a class="logo" href="/">Comercial Jenk Cáceres<small>Bisutería</small></a>
       <nav class="nav" aria-label="Principal">
@@ -20,7 +21,7 @@ class SiteHeader extends HTMLElement {
         <a href="/tienda.html?cat=conjuntos">Conjuntos</a>
       </nav>
       <div class="account"></div>
-      <div class="cart-wrap">
+  <div class="cart-wrap">
         <a class="cart-link" href="/payment.html" aria-label="Ver carrito" aria-describedby="cart-dropdown">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="9" cy="21" r="1"></circle>
@@ -73,7 +74,7 @@ class SiteHeader extends HTMLElement {
     this.querySelector('#cart-subtotal').textContent = dinero(subtotal);
   }
 
-    async pintarCuenta() {
+  async pintarCuenta() {
     const caja = this.querySelector('.account');
     const user = await api.auth.me();
     if (!user) {
@@ -87,7 +88,6 @@ class SiteHeader extends HTMLElement {
     salir.addEventListener('click', async () => { await api.auth.logout(); this.pintarCuenta(); });
     caja.replaceChildren(h('span', { class: 'account-hello' }, `Hola, ${user.nombre.split(' ')[0]}`), salir);
   }
-
 }
 customElements.define('site-header', SiteHeader);
 

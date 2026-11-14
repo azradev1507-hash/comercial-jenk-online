@@ -3,6 +3,9 @@ import { api } from '../api.js';
 import { h } from '../utils/dom.js';
 import { initMapPicker, dentroDeVenezuela } from '../components/map-picker.js';
 import { EMAIL_RE, setError, setFormError, setBusy, clearOnInput, initPasswordToggles, safeNext, carryNext } from '../utils/forms.js';
+import { limpiarRestosDeCache } from '../utils/sin-cache.js';
+
+limpiarRestosDeCache();
 
 const NOMBRE_RE = /^\p{L}[\p{L}\s'.-]*$/u;
 const CEDULA_RE = /^\d{6,9}$/;

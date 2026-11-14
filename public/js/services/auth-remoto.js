@@ -1,5 +1,5 @@
 // Autenticación contra el backend (/api/auth/*). La sesión vive en una cookie HttpOnly que pone el
-// servidor: el navegador no ve ni guarda tokens ni datos del usuario. Mismo contrato que mock/auth-local.js.
+// servidor: el navegador no ve ni guarda tokens ni datos del usuario.
 // Para que otras pestañas se enteren de un ingreso o una salida (no escribe nada en localStorage)
 const canal = typeof BroadcastChannel === 'undefined' ? null : new BroadcastChannel('jenk-auth');
 

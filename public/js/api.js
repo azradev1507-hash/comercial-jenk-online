@@ -2,23 +2,6 @@
 // cuando exista /api/catalog se cambia aquí y ninguna página se entera.
 import { authRemoto } from './services/auth-remoto.js';
 
-// Sin backend (servidor estático): localStorage.setItem('jenk.mock','1') en la consola activa la sesión simulada.
-// El mock solo se descarga en ese caso; por defecto NO se carga ni se usa.
-const USAR_MOCK = (() => { try { return localStorage.getItem('jenk.mock') === '1'; } catch { return false; } })();
-
-function authSimulada() {
-  console.warn('[Jenk] Sesión SIMULADA activa (localStorage "jenk.mock"). No se envía nada al backend. Para desactivarla: localStorage.removeItem("jenk.mock")');
-  const cargar = () => import('./mock/auth-local.js').then((m) => m.authLocal);
-  return {
-    register: (d) => cargar().then((a) => a.register(d)),
-    login: (d) => cargar().then((a) => a.login(d)),
-    recover: (d) => cargar().then((a) => a.recover(d)),
-    logout: () => cargar().then((a) => a.logout()),
-    me: () => cargar().then((a) => a.me()),
-    onChange(cb) { let off = () => {}; cargar().then((a) => { off = a.onChange(cb); }); return () => off(); },
-  };
-}
-
 // Productos de ejemplo. Campos opcionales: oldPrice (precio anterior, muestra el % de descuento) y badge ('Nuevo', 'Últimas piezas'…).
 const MOCK = [
   { slug: 'aretes-perla-gota',     name: 'Aretes perla gota',                  category: 'Aretes',    price: 4.5,  tone: '#f3dce6', bead: '#c0527a', badge: 'Nuevo' },
@@ -115,6 +98,6 @@ export const api = {
     },
   },
   rate: async () => 0, // tasa BCV: pendiente de conectar (0 = no mostrar Bs)
-  // Sesión de usuarios: backend real (/api/auth/*, cookie HttpOnly). El mock queda solo para desarrollo sin servidor.
-  auth: USAR_MOCK ? authSimulada() : authRemoto,
+  // Sesión de usuarios: backend real (/api/auth/*, cookie HttpOnly). No hay modo simulado ni datos en el navegador.
+  auth: authRemoto,
 };

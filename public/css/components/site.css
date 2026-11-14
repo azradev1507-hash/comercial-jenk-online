@@ -94,12 +94,13 @@
     color: var(--rose-deep);
 }
 
+/* Dropdown del resumen */
 .cart-dropdown {
     position: absolute;
     top: 100%;
     right: 0;
     width: 300px;
-    padding-top: .6rem;    
+    padding-top: .6rem;          /* puente invisible: el hover no se pierde al bajar el mouse */
     opacity: 0;
     visibility: hidden;
     transform: translateY(6px);
@@ -161,6 +162,7 @@
     min-height: 44px;
 }
 
+/* Solo en dispositivos con mouse; en móvil el clic va directo a /payment.html */
 @media (hover: hover) {
     .cart-wrap:hover .cart-dropdown,
     .cart-wrap:focus-within .cart-dropdown {
