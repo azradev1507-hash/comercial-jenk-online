@@ -52,12 +52,6 @@ class SiteHeader extends HTMLElement {
     const n = carrito.contar();
     this.querySelector('#cart-count').textContent = String(n);
     this.querySelector('.cart-link').setAttribute('aria-label', n ? `Ver carrito, ${n} ${n === 1 ? 'pieza' : 'piezas'}` : 'Ver carrito');
-  }
-
-  pintarCarrito() {
-    const n = carrito.contar();
-    this.querySelector('#cart-count').textContent = String(n);
-    this.querySelector('.cart-link').setAttribute('aria-label', n ? `Ver carrito, ${n} ${n === 1 ? 'pieza' : 'piezas'}` : 'Ver carrito');
 
     // ⚠️ Ajusta esta línea a como tu servicio devuelve los productos
     const items = carrito.items();   // esperado: [{ nombre, precio, cantidad }]
@@ -78,6 +72,22 @@ class SiteHeader extends HTMLElement {
     const subtotal = items.reduce((t, i) => t + i.precio * i.cantidad, 0);
     this.querySelector('#cart-subtotal').textContent = dinero(subtotal);
   }
+
+    async pintarCuenta() {
+    const caja = this.querySelector('.account');
+    const user = await api.auth.me();
+    if (!user) {
+      // Desde una página de la tienda, al ingresar se vuelve a la misma página
+      const next = location.pathname.startsWith('/cuenta/') ? ''
+        : `?next=${encodeURIComponent(location.pathname + location.search)}`;
+      caja.replaceChildren(h('a', { class: 'account-link', href: `/cuenta/login.html${next}` }, 'Ingresar'));
+      return;
+    }
+    const salir = h('button', { type: 'button', class: 'account-out' }, 'Salir');
+    salir.addEventListener('click', async () => { await api.auth.logout(); this.pintarCuenta(); });
+    caja.replaceChildren(h('span', { class: 'account-hello' }, `Hola, ${user.nombre.split(' ')[0]}`), salir);
+  }
+
 }
 customElements.define('site-header', SiteHeader);
 
