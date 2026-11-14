@@ -1,0 +1,178 @@
+/* Inicio de sesión y registro (pantalla dividida: marca a la izquierda, formulario a la derecha) */
+.skip-link { position: absolute; left: -999px; top: 0; z-index: 99; padding: .6rem 1rem; background: #fff; color: var(--ink); border-radius: 0 0 var(--radius-sm) 0; }
+.skip-link:focus { left: 0; top: 5px; }
+
+.auth { min-height: 100vh; min-height: 100dvh; display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
+
+/* ---------- Panel de marca ---------- */
+.auth__marca {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: calc(clamp(28px, 5vw, 56px) + 5px) clamp(28px, 5vw, 56px) clamp(28px, 5vw, 56px);
+  color: #ecdce4;
+  background: var(--ink);
+}
+.auth__marca > * { position: relative; z-index: 1; }
+/* Cuenta decorativa, la misma del hilo de la portada */
+.auth__marca::after {
+  content: "";
+  position: absolute;
+  right: -16%;
+  bottom: -12%;
+  width: 52%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, #fff 0 6%, var(--rose) 42%, var(--rose-deep) 100%);
+  opacity: .7;
+  pointer-events: none;
+}
+.auth__logo { display: inline-block; align-self: flex-start; padding: 12px 16px; background: #fff; border-radius: 14px; line-height: 0; }
+.auth__logo img { height: 44px; width: auto; }
+.auth__lema { font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.2; letter-spacing: -.02em; font-weight: 700; color: #fff; max-width: 18ch; }
+.auth__puntos { list-style: none; display: grid; gap: 12px; margin-top: 24px; font-size: var(--fs-sm); }
+.auth__puntos li { padding-left: 18px; position: relative; max-width: 30ch; }
+.auth__puntos li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--rose-light); }
+
+/* ---------- Panel del formulario ---------- */
+.auth__panel { display: grid; place-items: center; padding: calc(clamp(24px, 5vw, 56px) + 5px) clamp(16px, 4vw, 48px) clamp(24px, 5vw, 56px); }
+.auth__caja { width: min(100%, 460px); }
+.auth__caja h1 { font-size: clamp(1.8rem, 3.4vw, 2.4rem); letter-spacing: -.03em; }
+.auth__intro { margin: 8px 0 28px; color: var(--muted); }
+
+.form { display: grid; gap: 18px; }
+.form__fila { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form__pie { margin-top: 22px; text-align: center; font-size: var(--fs-sm); max-width: none; }
+.form__olvido { justify-self: end; font-size: var(--fs-sm); margin-top: -8px; }
+.form__pie a, .form__olvido { font-weight: 600; }
+
+/* ---------- Campos ---------- */
+.campo { display: grid; gap: 6px; min-width: 0; }
+.campo label { font-weight: 600; font-size: var(--fs-sm); }
+
+.campo input[type="text"],
+.campo input[type="email"],
+.campo input[type="tel"],
+.campo input[type="password"],
+.campo input[type="date"],
+.campo textarea,
+.campo select {
+  width: 100%;
+  min-height: 48px;
+  padding: .7rem .9rem;
+  font: 400 var(--fs-md) var(--font-body);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--muted);
+  border-radius: 10px;
+  transition: border-color .15s, box-shadow .15s, background-color .15s;
+}
+.campo textarea { resize: vertical; line-height: 1.4; }
+.campo input::placeholder, .campo textarea::placeholder { color: #a18f99; }
+.campo input:hover, .campo select:hover, .campo textarea:hover { border-color: var(--rose-deep); }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--rose-deep); box-shadow: 0 0 0 3px var(--verde-tint); }
+.campo input[aria-invalid="true"], .campo textarea[aria-invalid="true"] { border-color: var(--danger); background: var(--danger-bg); }
+.campo input[aria-invalid="true"]:focus, .campo textarea[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(192, 57, 43, .18); }
+
+.campo__ayuda { font-size: var(--fs-xs); color: var(--muted); }
+.campo__error { font-size: var(--fs-sm); font-weight: 500; color: var(--danger-hover); }
+.campo__error a { color: inherit; font-weight: 600; }
+
+/* Cédula: tipo (V/E) + número en una sola línea */
+.cedula { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 10px; }
+.cedula select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2rem;
+  font-weight: 600;
+  background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%237a6670' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right .8rem center;
+}
+
+/* Contraseña con botón Mostrar / Ocultar dentro del campo */
+.input-clave { position: relative; }
+.input-clave input { padding-right: 5.6rem !important; }
+.input-clave button {
+  position: absolute;
+  right: .35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  min-height: 40px;
+  padding: 0 .85rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--rose-deep);
+  font: 600 var(--fs-sm) var(--font-body);
+  cursor: pointer;
+}
+.input-clave button:hover { background: var(--rose-faint); }
+
+/* ---------- Dirección con mapa ---------- */
+.direccion { display: grid; gap: 12px; min-width: 0; border: 0; }
+.direccion legend { padding: 0; margin-bottom: 6px; font-weight: 600; font-size: var(--fs-sm); }
+.opcional { font-weight: 400; color: var(--muted); }
+
+.mapa-busqueda { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.mapa-busqueda input {
+  width: 100%; min-height: 48px; padding: .7rem .9rem;
+  font: 400 var(--fs-md) var(--font-body); color: var(--ink);
+  background: var(--surface); border: 1.5px solid var(--muted); border-radius: 10px;
+}
+.mapa-busqueda input:hover { border-color: var(--rose-deep); }
+.mapa-busqueda input:focus { outline: none; border-color: var(--rose-deep); box-shadow: 0 0 0 3px var(--verde-tint); }
+.btn-sec {
+  min-height: 48px; padding: 0 1.2rem; cursor: pointer;
+  font: 600 var(--fs-sm) var(--font-body); color: var(--rose-deep);
+  background: var(--surface); border: 1.5px solid var(--rose); border-radius: 10px;
+  transition: background-color .15s;
+}
+.btn-sec:hover { background: var(--rose-faint); }
+.btn-sec:disabled { opacity: .6; cursor: progress; }
+
+.mapa-resultados { list-style: none; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; max-height: 220px; overflow-y: auto; }
+.mapa-resultados li + li { border-top: 1px solid var(--line); }
+.mapa-resultados button { display: block; width: 100%; min-height: 44px; padding: .6rem .9rem; text-align: left; font: 400 var(--fs-sm) var(--font-body); color: var(--ink); background: none; border: 0; cursor: pointer; }
+.mapa-resultados button:hover, .mapa-resultados button:focus-visible { background: var(--rose-faint); }
+
+.mapa { height: 280px; isolation: isolate; border: 1.5px solid var(--muted); border-radius: 10px; overflow: hidden; background: var(--surface-2); }
+.mapa-pie { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.mapa-pie .campo__ayuda { flex: 1; }
+.campo__ayuda.is-error { color: var(--danger-hover); font-weight: 500; }
+.enlace-btn { flex: none; min-height: 32px; padding: 0; border: 0; background: none; color: var(--rose-deep); font: 600 var(--fs-sm) var(--font-body); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.enlace-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Marcador de marca (gota rosa) */
+.pin-icono { background: none; border: 0; }
+.pin { display: block; width: 30px; height: 30px; background: var(--rose); border: 3px solid #fff; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 0 2px 6px rgba(26, 18, 24, .4); }
+.pin::after { content: ""; position: absolute; inset: 9px; background: #fff; border-radius: 50%; }
+
+/* Casilla de términos */
+.check { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 10px; row-gap: 6px; align-items: start; }
+.check input { width: 22px; height: 22px; margin-top: 1px; accent-color: var(--rose); cursor: pointer; }
+.check label { font-weight: 400; font-size: var(--fs-sm); line-height: 1.45; }
+.check .campo__error { grid-column: 2; }
+
+/* Error general del formulario */
+.form-alerta { padding: .8rem 1rem; border-radius: 10px; background: var(--danger-bg); color: var(--danger-hover); font-size: var(--fs-sm); font-weight: 500; border: 1px solid #f1c4be; }
+.form-alerta:focus { outline: 2px solid var(--danger); outline-offset: 2px; }
+
+/* Registro hecho: revisa tu correo */
+.exito { padding: 28px; background: var(--success-bg); border: 1px solid #bfe3cf; border-radius: var(--radius); }
+.exito h2 { font-size: 1.4rem; color: #1d5a39; }
+.exito p { margin-top: 10px; color: #1d5a39; }
+.exito .btn { margin-top: 18px; }
+.exito:focus { outline: 2px solid var(--success); outline-offset: 2px; }
+
+@media (max-width: 900px) {
+  .auth { grid-template-columns: 1fr; }
+  .auth__marca { padding-block: calc(20px + 5px) 20px; }
+  .auth__marca::after { display: none; }
+  .auth__lema, .auth__puntos { display: none; }
+  .auth__panel { place-items: start center; }
+}
+@media (max-width: 520px) {
+  .form__fila { grid-template-columns: 1fr; }
+}

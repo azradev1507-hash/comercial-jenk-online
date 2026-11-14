@@ -1,0 +1,86 @@
+/* Tienda: hereda .bento, .tile y .section de inicio.css y las tarjetas de site.css */
+site-hero, promo-banners { display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Hero */
+.tienda-hero { grid-template-columns: repeat(12, 1fr); padding-top: 1.2rem; }
+.th-main { grid-column: 1 / 9; display: flex; flex-direction: column; justify-content: center; }
+.th-main h1 { max-width: 14ch; }
+.th-main p { margin: 1.1rem 0 1.8rem; font-size: var(--fs-lg); color: #5a4852; }
+.search { display: flex; gap: .4rem; max-width: 520px; padding: 5px; border-radius: 999px; background: var(--claro-soft); }
+.search:focus-within { outline: 2px solid var(--rose); outline-offset: 2px; }
+.search input { flex: 1; min-width: 0; padding: 0 1.1rem; border: 0; outline: 0; background: transparent; color: var(--ink); font: 400 var(--fs-md) var(--font-body); }
+.search input::placeholder { color: var(--muted); }
+.th-beads { grid-column: 9 / 13; background: var(--verde-tint); display: grid; place-items: center; padding: 1rem; }
+.bracelet { width: 100%; height: auto; }
+
+/* Banners de promociones y cupones */
+.promos { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); margin-top: var(--gap); }
+.promo { display: flex; flex-direction: column; justify-content: flex-end; gap: 1.2rem; min-height: 250px; text-decoration: none; }
+.size-lg { grid-column: span 6; }
+.size-md, .size-sm { grid-column: span 3; }
+.promo h2 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); }
+.promo p { margin-top: .35rem; font-size: var(--fs-sm); }
+
+/* Promoción con enlace */
+a.promo::after { content: ""; position: absolute; top: -12%; right: -10%; width: 34%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #fff 0 8%, var(--bead, var(--rose)) 45%, var(--rose-deep) 100%); opacity: .9; }
+.promo-cta { font-weight: 600; font-size: var(--fs-sm); text-decoration: underline; text-underline-offset: 3px; }
+.tone-rose { background: var(--rose-light); color: var(--ink); --bead: var(--rose-deep); }
+.tone-rose:hover, .tone-rose:hover .promo-cta { color: var(--ink); background: #e08fac; }
+.tone-ink { background: var(--ink); color: #fff; --bead: var(--rose); }
+.tone-ink p { color: #d9c9d1; }
+.tone-ink:hover, .tone-ink:hover .promo-cta { color: #fff; }
+.tone-ink .promo-cta { color: #fff; }
+
+/* Cupón con forma de boleto: dos partes separadas por una línea de corte */
+.ticket { display: grid; grid-template-columns: 1fr auto; padding: 0; min-height: 250px; background: var(--rose-deep); color: #fff; }
+.ticket-main { padding: clamp(1.4rem, 3vw, 2.4rem); display: flex; flex-direction: column; justify-content: flex-end; }
+.ticket-main p { color: #f3dce6; }
+.ticket-main .ticket-note { color: #e8c9d5; font-size: var(--fs-xs); }
+.ticket-stub { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9rem; padding: 1.4rem clamp(1.2rem, 2.4vw, 2rem); background: var(--verde-800); border-left: 2px dashed rgba(255, 255, 255, .4); }
+.ticket-stub::before, .ticket-stub::after { content: ""; position: absolute; left: -15px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg); }
+.ticket-stub::before { top: -14px; }
+.ticket-stub::after { bottom: -14px; }
+.ticket-stub code { font: 800 1.7rem var(--font-body); letter-spacing: .08em; color: #fff; }
+.copy-btn { min-height: 44px; padding: 0 1.3rem; border: 0; border-radius: 999px; background: #fff; color: var(--rose-deep); font: 600 var(--fs-sm) var(--font-body); cursor: pointer; white-space: nowrap; transition: background-color .15s; }
+.copy-btn:hover { background: var(--rose-faint); }
+.copy-btn.is-done { background: var(--success-bg); color: #1f6040; }
+
+/* Catálogo */
+.count { color: var(--muted); font-size: var(--fs-sm); }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem 1.2rem; margin-bottom: 1.2rem; padding-inline: .4rem; }
+.chips { display: flex; gap: .5rem; overflow-x: auto; padding: 3px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { min-height: 44px; padding: 0 1.2rem; border: 0; border-radius: 999px; background: var(--surface); color: var(--ink); font: 600 var(--fs-sm) var(--font-body); white-space: nowrap; cursor: pointer; transition: background-color .15s; }
+.chip:hover { background: var(--verde-tint); }
+.chip[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.sort { display: inline-flex; align-items: center; gap: .6rem; font-size: var(--fs-sm); color: var(--muted); }
+.sort select { min-height: 44px; padding: 0 1rem; border: 0; border-radius: 999px; background: var(--surface); color: var(--ink); font: 600 var(--fs-sm) var(--font-body); cursor: pointer; }
+
+.grid-catalog { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.empty { grid-column: 1 / -1; display: grid; justify-items: center; gap: .8rem; padding-block: 3.5rem; text-align: center; }
+.empty p { color: var(--muted); }
+.more-wrap { display: grid; place-items: center; margin-top: 2rem; }
+
+@media (max-width: 1000px) { .grid-catalog { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) {
+  .tienda-hero { grid-template-columns: 1fr; }
+  .th-main, .th-beads { grid-column: 1; }
+  .th-beads { order: -1; }
+  .bracelet { max-height: 240px; }
+  .promos { grid-template-columns: repeat(2, 1fr); }
+  .size-lg { grid-column: 1 / -1; }
+  .size-md, .size-sm { grid-column: span 1; }
+}
+@media (max-width: 640px) {
+  .grid-catalog { grid-template-columns: repeat(2, 1fr); }
+  .ticket { grid-template-columns: 1fr; }
+  .ticket-stub { border-left: 0; border-top: 2px dashed rgba(255, 255, 255, .4); flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+  .ticket-stub::before, .ticket-stub::after { top: -15px; bottom: auto; }
+  .ticket-stub::before { left: -14px; }
+  .ticket-stub::after { left: auto; right: -14px; }
+  .promos { grid-template-columns: 1fr; }
+  .size-md, .size-sm { grid-column: 1 / -1; }
+  .search { max-width: none; }
+  .promo, .ticket { min-height: 180px; }
+}
