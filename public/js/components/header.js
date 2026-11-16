@@ -49,13 +49,18 @@ class SiteHeader extends HTMLElement {
 
   disconnectedCallback() { this.dejarDeEscuchar?.(); this.dejarDeEscucharCarrito?.(); }
 
-  pintarCarrito() {
+  async pintarCarrito() {
+    // El carrito guarda solo {slug, qty}: nombre y precio salen del catálogo
+    const lineas = carrito.leer();
     const n = carrito.contar();
     this.querySelector('#cart-count').textContent = String(n);
     this.querySelector('.cart-link').setAttribute('aria-label', n ? `Ver carrito, ${n} ${n === 1 ? 'pieza' : 'piezas'}` : 'Ver carrito');
 
-    // ⚠️ Ajusta esta línea a como tu servicio devuelve los productos
-    const items = carrito.items();   // esperado: [{ nombre, precio, cantidad }]
+    // Si el carrito cambia mientras se piden los productos, solo se pinta la última respuesta
+    const turno = (this.turnoCarrito = (this.turnoCarrito ?? 0) + 1);
+    const productos = lineas.length ? await api.catalog.byIds(lineas.map((l) => l.slug)) : new Map();
+    if (turno !== this.turnoCarrito) return;
+    const items = lineas.filter((l) => productos.has(l.slug)).map((l) => ({ ...productos.get(l.slug), qty: l.qty }));
 
     const lista = this.querySelector('.cart-items');
     const dinero = (v) => `$${Number(v).toFixed(2)}`;
@@ -65,12 +70,12 @@ class SiteHeader extends HTMLElement {
     } else {
       lista.replaceChildren(...items.map((i) =>
         h('li', {},
-          h('span', { class: 'cart-item-name' }, `${i.nombre} × ${i.cantidad}`),
-          h('span', {}, dinero(i.precio * i.cantidad))
+          h('span', { class: 'cart-item-name' }, `${i.name} × ${i.qty}`),
+          h('span', {}, dinero(i.price * i.qty))
         )
       ));
     }
-    const subtotal = items.reduce((t, i) => t + i.precio * i.cantidad, 0);
+    const subtotal = items.reduce((t, i) => t + i.price * i.qty, 0);
     this.querySelector('#cart-subtotal').textContent = dinero(subtotal);
   }
 
