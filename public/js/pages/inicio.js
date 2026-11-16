@@ -21,9 +21,14 @@ function drawStrand(svg) {
 
 async function init() {
   drawStrand(document.getElementById('strand'));
-  const [items, rate] = await Promise.all([api.catalog.list({ limit: 8 }), api.rate()]);
-  const cards = items.slice(0, 5).map(p => renderProductCard(p, rate));
-  cards[0]?.classList.add('big'); // el primero ocupa 2x2 en el bento
+  const [items, todos, rate] = await Promise.all([api.catalog.list({ limit: 9 }), api.catalog.list({ limit: 100 }), api.rate()]);
+  const norm = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  document.querySelectorAll('.cat-n').forEach((el) => {
+    const n = todos.filter((p) => norm(p.category) === el.dataset.cat).length;
+    el.textContent = n === 1 ? '1 pieza' : `${n} piezas`;
+  });
+  const cards = items.map(p => renderProductCard(p, rate));
+  cards[0]?.classList.add('big'); // el primero ocupa 2x2 en el bento (6 columnas)
   document.getElementById('destacados').replaceChildren(...cards);
 }
 init();

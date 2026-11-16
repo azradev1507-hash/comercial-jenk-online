@@ -78,7 +78,9 @@ async function init() {
       h('div', { class: 'pp-compra' }, h('div', { class: 'campo' }, h('label', { for: 'cant' }, 'Cantidad'), cant), boton),
       aviso,
       h('ul', { class: 'pp-notas' },
-        h('li', {}, 'Venta al detal.'),
+        h('li', {}, 'Venta al detal'),
+        h('li', {}, 'Paga con tarjeta o pago móvil'),
+        h('li', {}, 'Retiro en tienda o entrega a domicilio'),
         h('li', {}, h('a', { href: '/legal/devoluciones.html' }, 'Cambios y devoluciones')))));
 
   const rel = (await api.catalog.list({ category: p.category, limit: 8 })).filter((x) => x.slug !== p.slug).slice(0, 4);

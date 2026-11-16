@@ -1,5 +1,6 @@
+/* Ancho máximo 1440px (antes 1120px, que dejaba >40% de una pantalla de 1920px vacío). Margen total: 2.5rem en móvil, hasta 4rem en pantallas grandes */
 .wrap {
-    width: min(1120px, 100% - 2.5rem);
+    width: min(1680px, 100% - clamp(1.5rem, 3vw, 3rem));
     margin-inline: auto;
 }
 
@@ -281,7 +282,7 @@
     margin-top: 5rem;
     background: var(--ink);
     color: #e9dde3;
-    padding: 3rem 0 2rem;
+    padding: 2.4rem 0 1.6rem;
 }
 
 .site-footer .wrap {
@@ -327,8 +328,8 @@
 
 /* ---- Minimalismo cálido: esquinas amplias, sin bordes, superficies suaves ---- */
 :root {
-    --gap: 14px;
-    --tile: 28px;
+    --gap: 12px;
+    --tile: 22px;
 }
 
 .product-card {
@@ -348,7 +349,7 @@
 }
 
 .product-card .info {
-    padding: 1rem 1.3rem 1.3rem;
+    padding: .85rem 1.05rem 1.1rem;
 }
 
 .product-card.big .thumb {
@@ -371,8 +372,8 @@
 }
 
 .site-footer {
-    margin: 5rem 10px 10px;
-    border-radius: 36px;
+    margin: 3rem 10px 10px;
+    border-radius: 28px;
 }
 
 /* Cuenta en el header: «Ingresar» o «Hola, nombre · Salir» */

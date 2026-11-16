@@ -3,20 +3,20 @@ site-hero, promo-banners { display: block; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* Hero */
-.tienda-hero { grid-template-columns: repeat(12, 1fr); padding-top: 1.2rem; }
-.th-main { grid-column: 1 / 9; display: flex; flex-direction: column; justify-content: center; }
+.tienda-hero { grid-template-columns: repeat(12, 1fr); padding-top: .9rem; }
+.th-main { grid-column: 1 / 8; padding: clamp(1.4rem, 3vw, 2.4rem); display: flex; flex-direction: column; justify-content: center; }
 .th-main h1 { max-width: 14ch; }
 .th-main p { margin: 1.1rem 0 1.8rem; font-size: var(--fs-lg); color: #5a4852; }
 .search { display: flex; gap: .4rem; max-width: 520px; padding: 5px; border-radius: 999px; background: var(--claro-soft); }
 .search:focus-within { outline: 2px solid var(--rose); outline-offset: 2px; }
 .search input { flex: 1; min-width: 0; padding: 0 1.1rem; border: 0; outline: 0; background: transparent; color: var(--ink); font: 400 var(--fs-md) var(--font-body); }
 .search input::placeholder { color: var(--muted); }
-.th-beads { grid-column: 9 / 13; background: var(--verde-tint); display: grid; place-items: center; padding: 1rem; }
-.bracelet { width: 100%; height: auto; }
+.th-beads { grid-column: 8 / 13; background: var(--verde-tint); display: grid; place-items: center; padding: 1rem; }
+.bracelet { width: 100%; height: auto; max-height: 300px; }
 
 /* Banners de promociones y cupones */
 .promos { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap); margin-top: var(--gap); }
-.promo { display: flex; flex-direction: column; justify-content: flex-end; gap: 1.2rem; min-height: 250px; text-decoration: none; }
+.promo { display: flex; flex-direction: column; justify-content: flex-end; gap: 1.2rem; min-height: 190px; text-decoration: none; }
 .size-lg { grid-column: span 6; }
 .size-md, .size-sm { grid-column: span 3; }
 .promo h2 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); }
@@ -33,7 +33,7 @@ a.promo::after { content: ""; position: absolute; top: -12%; right: -10%; width:
 .tone-ink .promo-cta { color: #fff; }
 
 /* Cupón con forma de boleto: dos partes separadas por una línea de corte */
-.ticket { display: grid; grid-template-columns: 1fr auto; padding: 0; min-height: 250px; background: var(--rose-deep); color: #fff; }
+.ticket { display: grid; grid-template-columns: 1fr auto; padding: 0; min-height: 190px; background: var(--rose-deep); color: #fff; }
 .ticket-main { padding: clamp(1.4rem, 3vw, 2.4rem); display: flex; flex-direction: column; justify-content: flex-end; }
 .ticket-main p { color: #f3dce6; }
 .ticket-main .ticket-note { color: #e8c9d5; font-size: var(--fs-xs); }
@@ -62,6 +62,8 @@ a.promo::after { content: ""; position: absolute; top: -12%; right: -10%; width:
 .empty p { color: var(--muted); }
 .more-wrap { display: grid; place-items: center; margin-top: 2rem; }
 
+@media (min-width: 1360px) { .grid-catalog { grid-template-columns: repeat(5, 1fr); } }
+@media (min-width: 1700px) { .grid-catalog { grid-template-columns: repeat(6, 1fr); } }
 @media (max-width: 1000px) { .grid-catalog { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 900px) {
   .tienda-hero { grid-template-columns: 1fr; }
